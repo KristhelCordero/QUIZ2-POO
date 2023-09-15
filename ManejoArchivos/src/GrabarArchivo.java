@@ -2,15 +2,13 @@
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
-import java.util.List;
-
-
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class GrabarArchivo {
 
-    public static void guardarArregloDeEstudiantes(List<Estudiante> estudiantes, String nombreArchivo) {
+    public static void guardarArregloDeEstudiantes(ArrayList<Estudiante> estudiantes, String nombreArchivo) {
         try {
             FileOutputStream fileOut = new FileOutputStream(nombreArchivo);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -24,9 +22,15 @@ public class GrabarArchivo {
     }
 
     public static void main(String[] args) {
-        Estudiante objeto = new Estudiante(42, "Hola, mundo!");
-        String nombreArchivo = "objeto.ser";
+        Estudiante estudiante1 = new Estudiante("pepe",23);
 
-        guardarObjetoSerializado(objeto, nombreArchivo);
+        Estudiante estudiante2 = new Estudiante("pepe",23);
+
+        Estudiante estudiante3 = new Estudiante("pepe",23);
+
+        String nombreArchivo = "ArregloEstudiantes:3";
+        ArrayList<Estudiante> listaEstudiantes = new ArrayList<>(Arrays.asList(estudiante1,estudiante2,estudiante3));
+
+        guardarArregloDeEstudiantes(listaEstudiantes, nombreArchivo);
     }
 }

@@ -1,9 +1,13 @@
 
+import java.io.EOFException;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class GrabarArchivo {
@@ -19,6 +23,25 @@ public class GrabarArchivo {
         } catch (IOException i) {
             i.printStackTrace();
         }
+    }
+
+    public static List<Object> leerArchivo(String nombre) throws IOException, ClassNotFoundException {
+        List<Object> objetosLeidos = new ArrayList<>();
+
+        try (FileInputStream archivo = new FileInputStream(nombre);
+             ObjectInputStream lectura = new ObjectInputStream(archivo)) {
+
+            while (true) {
+                Object objeto = lectura.readObject();
+                objetosLeidos.add(objeto);
+            }
+
+        } catch(EOFException exception) {
+            exception.printStackTrace(System.out);
+        } catch (IOException error) {
+            error.printStackTrace(System.out);
+        }
+        return objetosLeidos;
     }
 
     public static void main(String[] args) {

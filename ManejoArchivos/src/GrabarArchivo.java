@@ -44,6 +44,25 @@ public class GrabarArchivo {
         return objetosLeidos;
     }
 
+    public static void leerArchivo2(String nombre) throws IOException, ClassNotFoundException {
+        Estudiante estudiante;
+
+        try {
+            FileInputStream archivo = new FileInputStream(nombre);
+            ObjectInputStream lectura = new ObjectInputStream(archivo);
+
+            while (true) {
+                estudiante = (Estudiante) lectura.readObject();
+                estudiante.toString();;
+            }
+
+        } catch(EOFException exception) {
+            return;
+        } catch (IOException error) {
+            error.printStackTrace(System.out);
+        }
+    }
+
     public static void main(String[] args) {
         Estudiante estudiante1 = new Estudiante("pepe",23);
 
